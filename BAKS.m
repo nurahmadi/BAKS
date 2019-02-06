@@ -13,14 +13,14 @@
 
 function [FiringRate h] = BAKS(SpikeTimes,Time,a,b)
 N = length(SpikeTimes);
-sumnum = 0; sumdenum = 0;
+sumnum = 0; sumdenom = 0;
 for i=1:N
     numerator = (((Time-SpikeTimes(i)).^2)./2 + 1./b).^(-a);
-    denumerator = (((Time-SpikeTimes(i)).^2)./2 + 1./b).^(-a-0.5);
+    denominator = (((Time-SpikeTimes(i)).^2)./2 + 1./b).^(-a-0.5);
     sumnum = sumnum + numerator;
-    sumdenum = sumdenum + denumerator;
+    sumdenom = sumdenom + denominator;
 end
-h = (gamma(a)/gamma(a+0.5)).*(sumnum./sumdenum);
+h = (gamma(a)/gamma(a+0.5)).*(sumnum./sumdenom);
 
 FiringRate = zeros(length(Time),1);
 for j=1:N
